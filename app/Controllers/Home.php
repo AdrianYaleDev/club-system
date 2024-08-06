@@ -84,7 +84,7 @@ class Home extends BaseController {
 		// If the user is an existing user lets halt here.
 		if($bExistingUser) {
 			$arrReturn['success'] = false;
-			$arrReturn['errors']['email_e'] = 'User already exists.';
+			$arrReturn['errors']['email'] = 'User already exists.';
 		}
 
 		// Now check if the club is an existing club.
@@ -95,7 +95,7 @@ class Home extends BaseController {
 		// If the user is an existing user lets halt here.
 		if($bExistingClub) {
 			$arrReturn['success'] = false;
-			$arrReturn['errors']['club_s'] = 'Club already exists.';
+			$arrReturn['errors']['club'] = 'Club already exists.';
 		}
 
 		if(!$arrReturn['success']) {
