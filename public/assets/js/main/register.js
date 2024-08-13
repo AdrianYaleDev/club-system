@@ -16,7 +16,6 @@ jQuery("#register_submit").click(function(e){
 		success: function(result){
 			// Check result, If within result is a failure then show errors on the front end with the error message.
 			// Otherwise we'll redirect the user to the signup success page, logging the user 
-			// var objData = JSON.parse(result)
 			if(result.errors) {
 				jQuery.each(result.errors, function(key, message) {
 					// Find the input element by ID
@@ -51,7 +50,6 @@ jQuery("#register_submit").click(function(e){
 				// Redirect to the new URL
 				window.location.href = newUrl;
 			}
-	  		console.log(result);
 
 		},
 		error: function(result){

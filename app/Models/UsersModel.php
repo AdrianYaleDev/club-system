@@ -86,4 +86,32 @@ class UsersModel extends Model
 
 
 	}
+
+	public function checkClubAssociation($iUserId, $iClubId)
+	{
+		$db = db_connect();
+
+		$strSQL = 'SELECT uca.user_id FROM user_club_association uca WHERE uca.user_id = ? AND uca.club_id = ?';
+
+		$query = $db->query($strSQL, [$iUserId, $iClubId]);
+		$arrResults = $query->getResult();
+
+
+		return $arrResults;
+	}
+
+	public function getUserSalt($iUserID) 
+	{
+		$db = db_connect();
+
+		$strSQL = 'SELECT u.salt FROM users u WHERE u.id = ?';
+
+		$query = $db->query($strSQL, [$iUserID]);
+		$strSalt = $query->getResult()[0]->salt;
+		return $strSalt;
+
+
+	}
+
+
 }

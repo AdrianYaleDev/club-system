@@ -15,7 +15,6 @@ class ClubsModel extends Model
 
 		$query = $db->query($strSQL, [$strClubName]);
 		$arrResults = $query->getResult();
-		$arrResults = false;
 		return $arrResults;
     }
 
@@ -46,6 +45,18 @@ class ClubsModel extends Model
 		}	
 
 		return $result;
+	}
+
+	public function getClubID($strClubName) 
+	{
+		$db = db_connect();
+
+		$strSQL = 'SELECT c.id FROM clubs c WHERE c.clubname = ?';
+		$query = $db->query($strSQL, [$strClubName]);
+		$arrResults = $query->getResult()[0]->id;
+		return $arrResults;
+
+
 	}
 
 }

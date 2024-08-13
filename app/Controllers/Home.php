@@ -8,6 +8,7 @@ use App\Models\ValidationModel;
 use App\Models\UsersModel;
 use App\Models\ClubsModel;
 use App\Models\PasswordModel;
+use Config\Services;
 
 class Home extends BaseController {
 
@@ -16,9 +17,10 @@ class Home extends BaseController {
 		$this->arrDB = ['test'];
 
 		$this->viewData["viewFolder"] = "main";
-
+		$this->session = \Config\Services::session();
 
 	}
+
 
 	public function index($param = false)
     {  
@@ -150,6 +152,26 @@ class Home extends BaseController {
 
 		$arrReturn['club'] = $arrInputs['clubname_s'];
 
+		//Now we are about to return lets create the session to log the user
+		// Set session data
+		session()->destroy();
+		session()->set('logged_in' , 1);
+
+
+		
+		$sessional = [
+			'user_id' => $iUserID,
+			'loggedIn' => true,
+		];
+		$this->session->set($sessional);
+
+
+
+		// session()->set('user_id' , $iUserID);
+		// echo '<pre>' . print_r(session(),1) .'</pre>';
+		// die();
+		
+		// $_SESSION['user_id'] = $iUserID;
 		echo json_encode($arrReturn);
 
 	}

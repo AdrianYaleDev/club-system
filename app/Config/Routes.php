@@ -28,9 +28,9 @@ if (preg_match('/^(.*)\.localhost\.com$/', $hostname, $matches)) {
 	// If it's a subdomain, extract the subdomain
     $subdomain = $matches[1];
 	// Add a route for the ClubAdmin controller
-	$routes->add('admin', 'ClubAdmin::index/' . $subdomain);
+	$routes->add('admin', 'Admin::index/' . $subdomain);
 	
-	$routes->add('admin/(:any)', 'ClubAdmin::$1/' . $subdomain);
+	$routes->add('admin/(:any)', 'Admin::$1/' . $subdomain);
 	// Add a route for the default method (index)
 	$routes->add('/', 'Club::index/' . $subdomain);
 

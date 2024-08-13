@@ -15,7 +15,7 @@ class PasswordModel extends Model
 	public function createHashedPassword($strPass, $strSalt){
 		
 		$strHash = '';
-		$strHashedPass = 'test';
+		$strHashedPass = '';
 
 		if($strPass && $strSalt) {
 			$strCombinedPassword = $strPass . $strSalt;
@@ -26,6 +26,26 @@ class PasswordModel extends Model
 		
 		return $strHashedPass;
 
+	}
+
+	public function checkPassword($strHashedPass, $strUserId)
+	{
+		
+		$bResult = false;
+		$db = db_connect();
+
+		$strSQL = 'SELECT u.pass FROM users u WHERE u.id = ?';
+
+		$query = $db->query($strSQL, [$strUserId]);
+		$arrResults = $query->getResult();
+
+		echo '<pre>'.print_r($arrResults[0]->pass,1) . '</pre>';
+
+		if($strHashedPass == $arrResults[0]->pass) {
+			$bResult = true;
+		}
+
+		return $bResult;
 	}
 
 
